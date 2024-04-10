@@ -14,13 +14,13 @@ public class AttendeeController {
     private final AttendeeService attendeeService;
 
     @GetMapping("/{attendeeId}/badge")
-    public ResponseEntity<AttendeeBadgeResponseDTO> getAttendeeBadge(@PathVariable String attendeeId, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity<AttendeeBadgeResponseDTO> getAttendeeBadge(@PathVariable Long attendeeId, UriComponentsBuilder uriComponentsBuilder){
         AttendeeBadgeResponseDTO response = attendeeService.getAttendeeBadge(attendeeId, uriComponentsBuilder);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/{attendeeId}/check-in")
-    public ResponseEntity registerCheckIn(@PathVariable String attendeeId, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity registerCheckIn(@PathVariable Long attendeeId, UriComponentsBuilder uriComponentsBuilder){
         attendeeService.checkInAttendee(attendeeId);
 
         var uri = uriComponentsBuilder.path("/v1/attendees/{attendeesId}/badge").buildAndExpand(attendeeId).toUri();
