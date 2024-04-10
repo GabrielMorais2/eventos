@@ -22,13 +22,13 @@ public class CheckInService {
 
         this.checkinRepository.save(newCheckIn);
     }
-    private void verifyCheckInExists(Long attendeeId){
+    private void verifyCheckInExists(String attendeeId){
         Optional<CheckIn> isCheckedIn = this.getCheckIn(attendeeId);
         if (isCheckedIn.isPresent()) throw new CheckInAlreadyExistsException("Attendee already checked in");
 
     }
 
-    public Optional<CheckIn> getCheckIn(Long attendeeId){
+    public Optional<CheckIn> getCheckIn(String attendeeId){
         return checkinRepository.findByAttendeeId(attendeeId);
     }
 }

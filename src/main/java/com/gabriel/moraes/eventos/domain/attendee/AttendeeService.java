@@ -15,8 +15,8 @@ public interface AttendeeService {
 
     Attendee registerAttendee(Attendee newAttendee);
 
-    void checkInAttendee(Long attendeeId);
+    void checkInAttendee(String attendeeId);
 
-    AttendeeBadgeResponseDTO getAttendeeBadge(Long attendeeId, UriComponentsBuilder uriComponentsBuilder);
+    AttendeeBadgeResponseDTO getAttendeeBadge(String attendeeId, UriComponentsBuilder uriComponentsBuilder);
 
 }

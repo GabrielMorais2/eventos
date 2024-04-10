@@ -48,12 +48,12 @@ public class AttendeeServiceImpl implements AttendeeService {
         return attendeeRepository.save(newAttendee);
     }
 
-    public void checkInAttendee(Long attendeeId) {
+    public void checkInAttendee(String attendeeId) {
         Attendee attendee = getAttendeeById(attendeeId);
         checkInService.registerCheckIn(attendee);
     }
 
-    public AttendeeBadgeResponseDTO getAttendeeBadge(Long attendeeId, UriComponentsBuilder uriComponentsBuilder) {
+    public AttendeeBadgeResponseDTO getAttendeeBadge(String attendeeId, UriComponentsBuilder uriComponentsBuilder) {
         Attendee attendee = getAttendeeById(attendeeId);
 
         String uri = uriComponentsBuilder.path("/v1/attendees/{attendeesId}/check-in")
@@ -82,7 +82,7 @@ public class AttendeeServiceImpl implements AttendeeService {
         );
     }
 
-    private Attendee getAttendeeById(Long attendeeId) {
+    private Attendee getAttendeeById(String attendeeId) {
         return attendeeRepository.findById(attendeeId)
                 .orElseThrow(() -> new AttendeeNotFoundException("Attendee not found with ID: " + attendeeId));
     }
