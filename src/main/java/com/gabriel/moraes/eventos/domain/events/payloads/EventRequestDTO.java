@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventRequest {
+public class EventRequestDTO {
     @NotBlank String title;
     @NotBlank String details;
     @Positive Integer maximumAttendees;

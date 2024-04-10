@@ -1,12 +1,16 @@
 package com.gabriel.moraes.eventos.domain.events;
 
-import com.gabriel.moraes.eventos.domain.events.payloads.EventRequest;
-import com.gabriel.moraes.eventos.domain.events.payloads.EventResponse;
+import com.gabriel.moraes.eventos.domain.attendee.payloads.AttendeeIdDTO;
+import com.gabriel.moraes.eventos.domain.attendee.payloads.AttendeeRequestDTO;
+import com.gabriel.moraes.eventos.domain.events.payloads.EventIdDTO;
+import com.gabriel.moraes.eventos.domain.events.payloads.EventRequestDTO;
+import com.gabriel.moraes.eventos.domain.events.payloads.EventResponseDTO;
 
 
 public interface EventService {
-    EventResponse createEvent(EventRequest eventRequest);
+    EventIdDTO createEvent(EventRequestDTO eventRequestDTO);
 
-    EventResponse getEventById(String id);
+    AttendeeIdDTO registerAttendeeOnEvent(String eventId, AttendeeRequestDTO attendeeRequestDTO);
 
+    EventResponseDTO getEventDetail(String id);
 }
