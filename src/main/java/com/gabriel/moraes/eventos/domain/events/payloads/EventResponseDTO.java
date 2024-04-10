@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventResponse {
+public class EventResponseDTO {
     String id;
     String title;
     String details;
