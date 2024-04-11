@@ -7,7 +7,7 @@ import com.gabriel.moraes.eventos.domain.attendee.payloads.AttendeeBadgeResponse
 import com.gabriel.moraes.eventos.domain.attendee.payloads.AttendeeDetails;
 import com.gabriel.moraes.eventos.domain.attendee.payloads.AttendeesListResponseDTO;
 import com.gabriel.moraes.eventos.domain.checkin.CheckIn;
-import com.gabriel.moraes.eventos.domain.checkin.CheckInService;
+import com.gabriel.moraes.eventos.domain.checkin.CheckInServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class AttendeeServiceImpl implements AttendeeService {
 
     private final AttendeeRepository attendeeRepository;
-    private final CheckInService checkInService;
+    private final CheckInServiceImpl checkInServiceImpl;
 
     public List<Attendee> getAllAttendeesFromEvent(String eventId) {
         return attendeeRepository.findByEventId(eventId);
@@ -50,7 +50,7 @@ public class AttendeeServiceImpl implements AttendeeService {
 
     public void checkInAttendee(String attendeeId) {
         Attendee attendee = getAttendeeById(attendeeId);
-        checkInService.registerCheckIn(attendee);
+        checkInServiceImpl.registerCheckIn(attendee);
     }
 
     public AttendeeBadgeResponseDTO getAttendeeBadge(String attendeeId, UriComponentsBuilder uriComponentsBuilder) {
@@ -71,7 +71,7 @@ public class AttendeeServiceImpl implements AttendeeService {
     }
 
     private AttendeeDetails mapAttendeeToDetails(Attendee attendee) {
-        Optional<CheckIn> checkIn = checkInService.getCheckIn(attendee.getId());
+        Optional<CheckIn> checkIn = checkInServiceImpl.getCheckIn(attendee.getId());
         LocalDateTime checkedInAt = checkIn.map(CheckIn::getCreatedAt).orElse(null);
         return new AttendeeDetails(
                 attendee.getId(),

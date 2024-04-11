@@ -9,16 +9,40 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: db_eventos
     ports:
-      - "5434:5432"
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
     restart: always
     networks:
       - spring-postgres
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready", "-d", "db_prod" ]
+      test: [ "CMD-SHELL", "pg_isready", "-U", "root", "-d", "db_eventos" ]
       interval: 30s
       timeout: 60s
       retries: 5
       start_period: 80s
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=db_eventos
+      - DB_PORT=5432
+    networks:
+      - spring-postgres
+    restart: always
+
+volumes:
+  postgres-data: {}
 
 networks:
   spring-postgres:
