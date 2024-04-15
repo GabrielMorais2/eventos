@@ -28,3 +28,9 @@ springdoc:
     path: /events/v3/api-docs
   swagger-ui:
     path: /events/swagger-ui.html
+
+jwt:
+  private:
+    key: classpath:app.key
+  public:
+    key: classpath:app.pub

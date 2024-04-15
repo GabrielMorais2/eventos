@@ -1,6 +1,9 @@
 INSERT INTO events (id, title, details, slug, maximum_attendees)
 VALUES ('7b869ea0-fc05-4c3c-b965-7d1ca75a0a7f', 'Evento solana - Cesar', 'Evento Cesar', 'evento-solana-cesar', 300);
 
+INSERT INTO users (id, name, email, password)
+VALUES ('f79a470e-7b0d-4052-94c5-1e7484a37265', 'admin', 'admin@teste', '$2a$10$1lpiXttwxy8lMoi2fQ/N.eDXU2I5eA8xZvSjZqK808/ZW9a.f19Lu');
+
 
 INSERT INTO attendees (id, name, email, event_id, created_at)
 VALUES
