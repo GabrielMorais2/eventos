@@ -9,6 +9,7 @@ import com.gabriel.moraes.eventos.domain.events.payloads.EventRequestDTO;
 import com.gabriel.moraes.eventos.domain.events.payloads.EventResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ public class EventController {
             @ApiResponse(responseCode = "200", description = "Event details retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "Event not found")
     })
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<EventResponseDTO> getEvent(@PathVariable String id) {
         EventResponseDTO eventResponseDTO = eventService.getEventDetail(id);
         return ResponseEntity.ok(eventResponseDTO);
@@ -39,6 +41,7 @@ public class EventController {
     @Operation(summary = "Create a new event", responses = {
             @ApiResponse(responseCode = "201", description = "Event created successfully")
     })
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<EventIdDTO> createEvent(@Valid @RequestBody EventRequestDTO eventRequestDTO, UriComponentsBuilder uriComponentsBuilder) {
         EventIdDTO eventIdDTO = eventService.createEvent(eventRequestDTO);
         var uri = uriComponentsBuilder.path("/v1/events/{id}").buildAndExpand(eventIdDTO.eventId()).toUri();
@@ -61,6 +64,7 @@ public class EventController {
             @ApiResponse(responseCode = "200", description = "List of attendees retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "Event not found")
     })
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<AttendeesListResponseDTO> getEventAttendees(@PathVariable String eventId) {
         AttendeesListResponseDTO attendeesListResponseDTO = attendeeService.getEventsAttendee(eventId);
         return ResponseEntity.ok(attendeesListResponseDTO);

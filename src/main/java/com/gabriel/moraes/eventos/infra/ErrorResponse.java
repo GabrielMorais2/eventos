@@ -1,4 +1,4 @@
-package com.gabriel.moraes.eventos.config;
+package com.gabriel.moraes.eventos.infra;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
