@@ -7,7 +7,9 @@ A aplicação permite aos organizadores cadastrar eventos e abrir páginas públ
 ### Tecnologias
 
 - JDK 17
-- Spring Boot with Maven
+- Spring Boot
+- Spring Security
+- Maven
 - Swagger
 - PostgreSQL
 - Docker
@@ -20,7 +22,7 @@ A aplicação permite aos organizadores cadastrar eventos e abrir páginas públ
 - [x] Organizadores devem poder cadastrar novos eventos.
 - [x] Organizadores devem poder visualizar os detalhes de um evento.
 - [x] Organizadores devem poder visualizar a lista de participantes de um evento.
-- [ ] Participantes devem poder se inscrever em eventos.
+- [x] Participantes devem poder se inscrever em eventos.
 - [x] Participantes devem poder visualizar seu crachá de inscrição.
 - [x] Participantes devem poder realizar check-in no evento.
 
@@ -67,18 +69,29 @@ O projeto expõe dois principais controllers RESTful:
 
 ### Eventos
 
-- GET /v1/events/{id}: Obtém os detalhes de um evento específico.
-- POST /v1/events: Cria um novo evento.
-- POST /v1/events/{eventId}/attendees: Registra um participante em um evento.
-- GET /v1/events/{eventId}/attendees: Obtém uma lista de todos os participantes de um evento.
+- GET /v1/events/{id}: Obtém os detalhes de um evento específico. Requer token JWT.
+- POST /v1/events: Cria um novo evento. Requer token JWT.
+- POST /v1/events/{eventId}/attendees: Registra um participante em um evento. Requer token JWT.
+- GET /v1/events/{eventId}/attendees: Obtém uma lista de todos os participantes de um evento. Requer token JWT.
 
 ### Participantes (Attendees)
 
-- GET /v1/attendees/{attendeeId}/badge: Recupera os detalhes da credencial para um participante específico.
-- POST /v1/attendees/{attendeeId}/check-in: Registra o check-in de um participante no evento.
+- GET /v1/attendees/{attendeeId}/badge: Recupera os detalhes da credencial para um participante específico. Requer token JWT.
+- POST /v1/attendees/{attendeeId}/check-in: Registra o check-in de um participante no evento. Requer token JWT.
+
+### Usuários
+
+- POST /v1/users/register: Registra um novo usuário.
+- POST /v1/users/login: Autentica um usuário e gera um token JWT para acesso aos recursos protegidos.
 
 Obs: O banco de dados é inicializado com arquivos de teste para preencher a base de dados. Atualmente, há 1 evento e 17 participantes cadastrados nele.
 
+Além disso, um usuário administrador já está criado para fins de teste, com o seguinte login e senha:
+
+- E-mail: admin@teste
+- Senha: 12345678
+
+Esse usuário pode ser utilizado para obter o token JWT necessário para acessar os endpoints protegidos.
 
 ## Documentação da API
 
@@ -86,9 +99,8 @@ A API está devidamente documentada utilizando anotações Swagger/OpenAPI. Voc�
 
 Além disso, uma coleção do Postman está disponível na pasta ./docs/. Para utilizá-la, basta importá-la na aplicação Postman.
 
-![image](https://github.com/GabrielMorais2/eventos/assets/68476116/6bd90773-1a67-4696-bdce-0d0e7f31b9f8)
+![Captura de tela 2024-04-15 115757](https://github.com/GabrielMorais2/eventos/assets/68476116/609a8b2a-e4c4-4ac2-b217-d8e7eb277a91)
 
 ## Funcionalidades para implementar:
 
-- Spring Security
 - Frontend com React.
