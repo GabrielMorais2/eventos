@@ -1,0 +1,15 @@
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${DB_PORT:5432}/${POSTGRES_DB:db_eventos}?createDatabaseIfNotExist=true
+    username: ${POSTGRES_USER:root}
+    password: ${POSTGRES_PASSWORD:root}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
